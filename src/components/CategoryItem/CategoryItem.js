@@ -17,6 +17,7 @@ export default function CategoryItem(props) {
     categoryImg5,
     categoryImg6,
   ];
+
   const { index, category } = props;
   return (
     <NavLink className={`col col-lg-2 col-md-4 col-sm-6 ${styles.link}`} to={`/courses/${category.maDanhMuc}`}>

@@ -84,7 +84,7 @@ class ListCourse extends Component {
                 SHOWN LESS <i className="fa fa-angle-double-up"></i>
               </Button>
             </span>
-            <NavLink to="/home/courses/all" className="ml-3">
+            <NavLink to="/courses/all" className="ml-3">
               <Button large secondary2>
                 SHOWN ALL<i className="fa fa-angle-double-right"></i>
               </Button>

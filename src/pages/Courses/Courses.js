@@ -5,6 +5,7 @@ import Course from "./Course/Course";
 import styles from "./Courses.module.css";
 import { Category2 } from "./Category2/Category2";
 import Button from "../../components/Button/Button";
+import withUseParamsHook from "../../components/hooks/useParamsHook";
 
 export class Courses extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export class Courses extends Component {
     });
     this.props.getCategoryList();
     this.props.getCourseList();
+    this.getCoursesByParams();
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -29,6 +31,21 @@ export class Courses extends Component {
       return {
         coursesArr: props.courses,
       };
+    }
+  }
+
+  getCoursesByParams = () => {
+    const { params } = this.props;
+    let coursesArr;
+    if(params){
+      coursesArr = this.props.courses.filter(item =>{
+        return (
+          item.danhMucKhoaHoc.maDanhMucKhoahoc === params
+        )
+      })
+      this.setState({
+        coursesArr
+      });
     }
   }
 
@@ -80,7 +97,6 @@ export class Courses extends Component {
 
   sortName = (type) => {
     let { coursesArr , searchResult } = this.state;
-    console.log(type)
     if(searchResult.length>0){
       searchResult.sort(this.compareName(type))
       this.setState({
@@ -167,7 +183,6 @@ export class Courses extends Component {
           item.tenKhoaHoc.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
         );
       });
-      console.log(result);
       this.setState({
         searchResult: result,
       });
@@ -196,6 +211,7 @@ export class Courses extends Component {
                   <Category2
                     category={courseCategoryList}
                     getCategoryCode={this.getCategoryCode}
+
                   />
                 </ul>
               </nav>
@@ -328,6 +344,7 @@ export class Courses extends Component {
               <div className={`${styles.courseWrapper}`}>
                 <div className="row" style={{ margin: "0px -20px" }}>
                   {this.renderCourse(courses)}
+                  {/* <Outlet/> */}
                 </div>
               </div>
               <ul className="pagination home-product__pagination">
@@ -393,4 +410,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Courses);
+export default withUseParamsHook(connect(mapStateToProps, mapDispatchToProps)(Courses));

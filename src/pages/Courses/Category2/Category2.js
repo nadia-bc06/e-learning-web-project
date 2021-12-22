@@ -1,5 +1,6 @@
 import styles from "./Category2.module.css";
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 
 export class Category2 extends Component {
   renderCategory = (category) => {
@@ -7,12 +8,20 @@ export class Category2 extends Component {
     if (category) {
       result = category.map((item, index) => {
         return (
-          <li
-            className={styles.categoryItem}
-            key={index}
-            onClick={() => this.props.getCategoryCode(item.maDanhMuc)}
-          >
-            {item.tenDanhMuc}
+          <li className={styles.categoryItem} key={index}>
+            <NavLink
+              style={({ isActive }) => {
+                return {
+                  backgroundColor: isActive ? "#694a99" : "",
+                  color: isActive ? "white" : ""
+                };
+              }}
+              className={styles.categoryItemLink}
+              to={`${item.maDanhMuc}`}
+              onClick={() => this.props.getCategoryCode(item.maDanhMuc)}
+            >
+              {item.tenDanhMuc}
+            </NavLink>
           </li>
         );
       });
@@ -25,19 +34,25 @@ export class Category2 extends Component {
 
     return (
       <>
-        <li
-          className={styles.categoryItem}
-          onClick={() => this.props.getCategoryCode()}
-        >
-          All courses
+        <li className={styles.categoryItem}>
+          <NavLink
+            style={({ isActive }) => {
+              return {
+                backgroundColor: isActive ? "#694a99" : "",
+                  color: isActive ? "white" : ""
+              };
+            }}
+            className={styles.categoryItemLink}
+            to="/courses/all"
+            onClick={() => this.props.getCategoryCode()}
+          >
+            All courses
+          </NavLink>
         </li>
         {this.renderCategory(category)}
       </>
     );
   }
 }
-
-
-
 
 export default Category2;
