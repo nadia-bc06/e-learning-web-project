@@ -2,40 +2,40 @@ import React, { Component } from "react";
 import styles from "./SignIn.module.css";
 import bgImg from "./../../assets/img/not-found-bg.jpg";
 import { Link } from "react-router-dom";
-import * as actions from './../../store/actions/actions';
+import * as actions from "./../../store/actions/actions";
 import { connect } from "react-redux";
+import withUseNavigateHook from "../../components/hooks/useNavigateHook";
 
 export class SignIn extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      accountNameTxt: '',
-      passwordTxt: '',
-    }
+      taiKhoan: "",
+      matKhau: "",
+    };
   }
 
-  componentDidMount = () =>{
+  componentDidMount = () => {
     window.scroll({
-      top:0,
-      behavior:"smooth"
-    })
-  }
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
-  handleOnChange = (e) =>{
-    let {name , value} = e.target;
+  handleOnChange = (e) => {
+    let { name, value } = e.target;
     this.setState({
-      [name] : value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   handleOnSubmit = (e) => {
-    
     e.preventDefault();
-    this.props.onSignIn(this.state)
-  }
+    this.props.onSignIn(this.state, this.props.navigate);
+  };
 
   render() {
-    const { accountNameTxt , passwordTxt} = this.state;
+    const { taiKhoan, matKhau } = this.state;
     return (
       <div
         className={styles.container}
@@ -43,7 +43,7 @@ export class SignIn extends Component {
       >
         <div className={styles.mainContent}>
           <form className={`form ${styles.form}`} id="signInForm">
-            <h3 className="heading" >Sign In</h3>
+            <h3 className="heading">Sign In</h3>
             <div className="spacer" />
 
             <div className={`form-group ${styles.formGroup}`}>
@@ -55,12 +55,12 @@ export class SignIn extends Component {
               </label>
               <input
                 id="account"
-                name="accountNameTxt"
+                name="taiKhoan"
                 type="text"
                 placeholder="Enter your account name"
                 className="form-control"
                 onChange={this.handleOnChange}
-                value={accountNameTxt}
+                value={taiKhoan}
               />
               <span className="form-message" />
             </div>
@@ -75,19 +75,24 @@ export class SignIn extends Component {
 
               <input
                 id="password"
-                name="passwordTxt"
+                name="matKhau"
                 type="password"
                 placeholder="Enter your password"
                 className="form-control"
                 onChange={this.handleOnChange}
-                value={passwordTxt}
+                value={matKhau}
               />
 
               <span className="form-message"></span>
             </div>
 
-            <button className="form-submit" onClick={this.handleOnSubmit}>Sign In</button><br/>
-            <Link to="/sign-up" className="question-txt" >You haven't got an account?</Link>
+            <button className="form-submit" onClick={this.handleOnSubmit}>
+              Sign In
+            </button>
+            <br />
+            <Link to="/sign-up" className="question-txt">
+              You haven't got an account?
+            </Link>
           </form>
         </div>
       </div>
@@ -95,12 +100,12 @@ export class SignIn extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-      onSignIn : (data) =>{
-        dispatch(actions.actSignIn(data))
-      }
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSignIn: (data, navigate) => {
+      dispatch(actions.actSignIn(data, navigate));
+    },
+  };
+};
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default withUseNavigateHook(connect(null, mapDispatchToProps)(SignIn));

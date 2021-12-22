@@ -77,25 +77,34 @@ export const actGetCoursesByCategory = (categoryCode) => {
   };
 };
 
-export const actSignUp = (data) => {
+export const actSignUp = (data, navigate) => {
   return () => {
-    localStorage.setItem("user", JSON.stringify(data));
+    callApi("QuanLyNguoiDung/DangKy", "POST", { ...data, maNhom: "GP01" })
+      .then((res) => {
+        console.log(res);
+        successApi("Sign up success!").then(() => {
+          navigate("/sign-in");
+        });
+      })
+      .catch((err) => {
+        errorApi(err);
+      });
   };
 };
 
-export const actSignIn = (data) => {
+export const actSignIn = (data, navigate) => {
   return () => {
-    let user = JSON.parse(localStorage.getItem("user"));
-    if (data) {
-      if (
-        user &&
-        user.accountNameTxt === data.accountNameTxt &&
-        user.passwordTxt === data.passwordTxt
-      ) {
-        successApi("Sign In Ok");
-      } else {
-        errorApi("Check your Info again");
-      }
-    }
+    callApi("QuanLyNguoiDung/DangNhap", "POST", data)
+      .then((res) => {
+        console.log(res)
+        successApi("Sign in success").then(() => {
+          localStorage.setItem("user", JSON.stringify(res.data));
+          navigate("/");
+        });
+      })
+      .catch((err) => {
+        errorApi(err);
+        console.log(err)
+      });
   };
 };

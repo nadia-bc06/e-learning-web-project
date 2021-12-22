@@ -13,25 +13,26 @@ export class SignUp extends Component {
     super(props);
     this.state = {
       values: {
-        fullNameTxt: "",
-        accountNameTxt: "",
-        emailTxt: "",
-        passwordTxt: "",
-        confirmPasswordTxt: "",
+        taiKhoan: '',
+				matKhau: '',
+				hoTen: '',
+				soDT: '',
+				email: '',
       },
       errors: {
-        fullNameTxt: "",
-        accountNameTxt: "",
-        emailTxt: "",
-        passwordTxt: "",
-        confirmPasswordTxt: "",
+        taiKhoan: '',
+				matKhau: '',
+				hoTen: '',
+				soDT: '',
+				email: '',
       },
       valids: {
-        fullNameTxt: false,
-        accountNameTxt: false,
-        emailTxt: false,
-        passwordTxt: false,
-        confirmPasswordTxt: false,
+        taiKhoan: false,
+				matKhau: false,
+				hoTen: false,
+				soDT: false,
+				email: false,
+				form: false,
       },
     };
   }
@@ -65,7 +66,7 @@ export class SignUp extends Component {
     isValid = message !== "" ? false : true;
     if (value !== "") {
       switch (name) {
-        case "fullNameTxt":
+        case "hoTen":
           if (
             !value.match(
               "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" +
@@ -77,7 +78,7 @@ export class SignUp extends Component {
             message = "Invalid value";
           }
           break;
-        case "emailTxt":
+        case "email":
           if (
             !value.match(
               "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
@@ -88,7 +89,7 @@ export class SignUp extends Component {
             message = "Invalid value";
           }
           break;
-        case "accountNameTxt":
+        case "taiKhoan":
           if (value.length < 4 || value.length > 15) {
             isValid = false;
             message = "Input 4 to 15 characters";
@@ -97,7 +98,7 @@ export class SignUp extends Component {
             message = "Invalid value";
           }
           break;
-        case "passwordTxt":
+        case "matKhau":
           if (value.length < 6) {
             isValid = false;
             message = "Password must have at least 6 characters";
@@ -106,13 +107,11 @@ export class SignUp extends Component {
             message = "Invalid value";
           }
           break;
-        case "confirmPasswordTxt":
-          let confirmValue = document.querySelector(
-            "input[name='passwordTxt']"
-          ).value;
-          if (value !== confirmValue) {
+        case "soDT":
+        
+          if (!value.match('^[0-9]*$')) {
             isValid = false;
-            message = "Confirmed password is not correct";
+            message = "Invalid Value";
           }
           break;
         default:
@@ -156,32 +155,20 @@ export class SignUp extends Component {
     this.setState({
       valids : {
         ...valids,
-        form : valids.fullNameTxt && valids.emailTxt && valids.accountNameTxt && valids.passwordTxt && valids.confirmPasswordTxt,
+        form: valids.taiKhoan && valids.matKhau && valids.hoTen && valids.soDT && valids.email,
       }
     })
   }
 
   handleOnSubMit = (e ) => {
     e.preventDefault();
-    const navigate = this.props.navigate;
-
     if(this.state.valids.form){
-      this.props.onSignUp(this.state.values);
+      this.props.onSignUp(this.state.values , this.props.navigate);
+    }else{
       Swal.fire({
-				icon: 'success',
-				title: 'Congratulations',
-				text: 'You have signed up successfully!',
-        showConfirmButton: false,
-        timer: 1500
-			});
-      navigate("/sign-in")
-    } else {
-       Swal.fire({
 				icon: 'error',
 				title: 'Oops...',
-				text: 'Check your info!',
-        showConfirmButton: false,
-        timer: 1500
+				text: 'Please check your info!',
 			});
     }
   };
@@ -190,11 +177,11 @@ export class SignUp extends Component {
   
    render() {
     const {
-      fullNameTxt,
-      accountNameTxt,
-      emailTxt,
-      passwordTxt,
-      confirmPasswordTxt,
+      taiKhoan,
+				matKhau,
+				hoTen,
+				soDT,
+				email,
     } = this.state.values;
 
     return (
@@ -216,12 +203,12 @@ export class SignUp extends Component {
               </label>
               <input
                 id="fullname"
-                name="fullNameTxt"
+                name="hoTen"
                 type="text"
                 placeholder="Enter your full name"
                 className="form-control"
                 onChange={this.handleOnChange}
-                value={fullNameTxt}
+                value={hoTen}
                 onBlur={this.handleErrors}
               />
               <span className="form-message" />
@@ -235,12 +222,12 @@ export class SignUp extends Component {
               </label>
               <input
                 id="email"
-                name="emailTxt"
+                name="email"
                 type="text"
                 placeholder={"Enter your email"}
                 className="form-control"
                 onChange={this.handleOnChange}
-                value={emailTxt}
+                value={email}
                 onBlur={this.handleErrors}
               />
               <span className="form-message" />
@@ -254,12 +241,12 @@ export class SignUp extends Component {
               </label>
               <input
                 id="account"
-                name="accountNameTxt"
+                name="taiKhoan"
                 type="text"
                 placeholder="Enter your account name"
                 className="form-control"
                 onChange={this.handleOnChange}
-                value={accountNameTxt}
+                value={taiKhoan}
                 onBlur={this.handleErrors}
               />
               <span className="form-message" />
@@ -275,12 +262,12 @@ export class SignUp extends Component {
 
               <input
                 id="password"
-                name="passwordTxt"
+                name="matKhau"
                 type="password"
                 placeholder="Enter your password"
                 className="form-control"
                 onChange={this.handleOnChange}
-                value={passwordTxt}
+                value={matKhau}
                 onBlur={this.handleErrors}
               />
 
@@ -289,19 +276,19 @@ export class SignUp extends Component {
 
             <div className={`form-group ${styles.formGroup}`}>
               <label
-                htmlFor="passwordConfirmation"
+                htmlFor="tel"
                 className={`form-label ${styles.formLabel}`}
               >
-                Confirm Password
+                Tel
               </label>
               <input
-                id="confrimPassword"
-                name="confirmPasswordTxt"
-                type="password"
-                placeholder="Enter your password again"
+                id="tel"
+                name="soDT"
+                type="text"
+                placeholder="Enter your telephone number"
                 className="form-control"
                 onChange={this.handleOnChange}
-                value={confirmPasswordTxt}
+                value={soDT}
                 onBlur={this.handleErrors}
               />
               <span className="form-message" />
@@ -324,8 +311,8 @@ export class SignUp extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSignUp : (data ) =>{
-      dispatch(actions.actSignUp(data ));
+    onSignUp : (data , navigate ) =>{
+      dispatch(actions.actSignUp(data , navigate));
     }
   }
 }

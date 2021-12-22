@@ -6,6 +6,7 @@ import styles from "./Courses.module.css";
 import { Category2 } from "./Category2/Category2";
 import Button from "../../components/Button/Button";
 import withUseParamsHook from "../../components/hooks/useParamsHook";
+import Pagination from "./Pagination/Pagination";
 
 export class Courses extends Component {
   constructor(props) {
@@ -14,6 +15,9 @@ export class Courses extends Component {
       coursesArr: [],
       searchResult: [],
       keyword: "",
+      total: 0,
+      limit: 6,
+      pageCount: 0,
     };
   }
   componentDidMount = () => {
@@ -37,17 +41,15 @@ export class Courses extends Component {
   getCoursesByParams = () => {
     const { params } = this.props;
     let coursesArr;
-    if(params){
-      coursesArr = this.props.courses.filter(item =>{
-        return (
-          item.danhMucKhoaHoc.maDanhMucKhoahoc === params
-        )
-      })
+    if (params) {
+      coursesArr = this.props.courses.filter((item) => {
+        return item.danhMucKhoaHoc.maDanhMucKhoahoc === params;
+      });
       this.setState({
-        coursesArr
+        coursesArr,
       });
     }
-  }
+  };
 
   getCategoryCode = (categoryCode) => {
     this.setState({
@@ -69,6 +71,7 @@ export class Courses extends Component {
 
   renderCourse = (courses) => {
     var result = null;
+   
     if (courses.length > 0) {
       result = courses.map((course, index) => {
         return <Course course={course} key={index} />;
@@ -78,60 +81,37 @@ export class Courses extends Component {
   };
 
   compareName = (type) => {
-    return (a , b) => {
+    return (a, b) => {
       a = a.tenKhoaHoc.toUpperCase();
       b = b.tenKhoaHoc.toUpperCase();
       let comparison = 0;
-      if(type === 1) {
-        if(a > b){
-          return comparison = 1
-        } else if( a < b ) return comparison = -1;
-      } else if(type === -1) {
-        if(a > b){
-          return comparison = -1
-        } else if( a < b ) return comparison = 1;
+      if (type === 1) {
+        if (a > b) {
+          return (comparison = 1);
+        } else if (a < b) return (comparison = -1);
+      } else if (type === -1) {
+        if (a > b) {
+          return (comparison = -1);
+        } else if (a < b) return (comparison = 1);
       }
-      return comparison
-    }
+      return comparison;
+    };
   };
 
   sortName = (type) => {
-    let { coursesArr , searchResult } = this.state;
-    if(searchResult.length>0){
-      searchResult.sort(this.compareName(type))
+    let { coursesArr, searchResult } = this.state;
+    if (searchResult.length > 0) {
+      searchResult.sort(this.compareName(type));
       this.setState({
         searchResult,
-      })
-    }else if(searchResult.length === 0){
+      });
+    } else if (searchResult.length === 0) {
       coursesArr.sort(this.compareName(type));
       this.setState({
-        coursesArr
+        coursesArr,
       });
     }
   };
-
-  // compareIncreasePrice = (a , b) =>{
-  //   const feeA = a.fee;
-  //   const feeB = b.fee;
-  //   let comparision;
-  //   if(feeA - feeB > 0){
-  //     comparision = 1;
-  //   }else if( feeA - feeB < 0){
-  //     comparision = -1;
-  //   }
-  //   return comparision;
-  // }
-  // compareDecreasePrice = (a , b) =>{
-  //   const feeA = a.fee;
-  //   const feeB = b.fee;
-  //   let comparision;
-  //   if(feeA - feeB > 0){
-  //     comparision = -1;
-  //   }else if( feeA - feeB < 0){
-  //     comparision = 1;
-  //   }
-  //   return comparision;
-  // }
 
   comparePrice = (type) => {
     return (a, b) => {
@@ -150,21 +130,6 @@ export class Courses extends Component {
       coursesArr,
     });
   };
-
-  // sortIncreasePrice = () =>{
-  //   let {coursesArr} = this.state;
-  //   coursesArr.sort(this.compareIncreasePrice);
-  //   this.setState({
-  //     coursesArr
-  //   })
-  // }
-  // sortDecreasePrice = () =>{
-  //   let {coursesArr} = this.state;
-  //   coursesArr.sort(this.compareDecreasePrice);
-  //   this.setState({
-  //     coursesArr
-  //   })
-  // }
 
   onChange = (e) => {
     let { name, value } = e.target;
@@ -194,10 +159,11 @@ export class Courses extends Component {
     const { courseCategoryList } = this.props;
     const { coursesArr, searchResult } = this.state;
     if (searchResult.length > 0) {
-      courses = searchResult;
-    } else {
-      courses = coursesArr;
+      courses = searchResult
+    } else if (searchResult.length === 0) {
+     courses = coursesArr
     }
+  
     return (
       <div className={styles.container}>
         <div className={styles.wrapper}>
@@ -211,7 +177,6 @@ export class Courses extends Component {
                   <Category2
                     category={courseCategoryList}
                     getCategoryCode={this.getCategoryCode}
-
                   />
                 </ul>
               </nav>
@@ -344,51 +309,18 @@ export class Courses extends Component {
               <div className={`${styles.courseWrapper}`}>
                 <div className="row" style={{ margin: "0px -20px" }}>
                   {this.renderCourse(courses)}
-                  {/* <Outlet/> */}
                 </div>
               </div>
-              <ul className="pagination home-product__pagination">
-                <li className="pagination-item">
-                  <a href className="pagination-item__link">
-                    <i className="pagination-item__icon fas fa-angle-left"> </i>
-                  </a>
-                </li>
-                <li className="pagination-item pagination-item--active">
-                  <a href className="pagination-item__link">
-                    {"{"}" "{"}"}1{"{"}" "{"}"}
-                  </a>
-                </li>
-                <li className="pagination-item">
-                  <a href className="pagination-item__link">
-                    {"{"}" "{"}"}2{"{"}" "{"}"}
-                  </a>
-                </li>
-                <li className="pagination-item">
-                  <a href className="pagination-item__link">
-                    {"{"}" "{"}"}
-                    ...{"{"}" "{"}"}
-                  </a>
-                </li>
-                <li className="pagination-item">
-                  <a href className="pagination-item__link">
-                    {"{"}" "{"}"}
-                    14{"{"}" "{"}"}
-                  </a>
-                </li>
-                <li className="pagination-item">
-                  <a href className="pagination-item__link">
-                    <i className="pagination-item__icon fas fa-angle-right">
-                      {" "}
-                    </i>
-                  </a>
-                </li>
-              </ul>
+              <Pagination/>
             </div>
           </div>
         </div>
       </div>
     );
+  
   }
+
+ 
 }
 
 const mapStateToProps = (state) => {
@@ -410,4 +342,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default withUseParamsHook(connect(mapStateToProps, mapDispatchToProps)(Courses));
+export default withUseParamsHook(
+  connect(mapStateToProps, mapDispatchToProps)(Courses)
+);

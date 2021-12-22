@@ -15,8 +15,10 @@ export class Course extends Component {
             <div className={styles.overlay}>
               <h3 className={styles.courseName}>{course.tenKhoaHoc}</h3>
               <p className={styles.categoryName}>
-                {course.danhMucKhoaHoc.tenDanhMucKhoaHoc}
+                {course.danhMucKhoaHoc.tenDanhMucKhoaHoc}<br/>
+                <span>${course.fee}</span>
               </p>
+              
             </div>
             <img
               className="card-img-top"
