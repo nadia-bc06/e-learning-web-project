@@ -1,0 +1,172 @@
+:root {
+  --header-height: 80px;
+}
+
+
+.navbar {
+  background: linear-gradient(90deg, var(--theme-color1), var(--theme-color2));
+  height: var(--header-height);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 999;
+  color: #fff;
+}
+
+.navbarContainer {
+  display: flex;
+  height: var(--header-height);
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  max-width: 1400px;
+}
+
+.navbarLogo {
+  width: 20%;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+}
+
+.navbarLogo a{
+  font-size: 2rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbarLogo  i {
+  margin-left: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.navbarMenu {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  list-style: none;
+  height: inherit;
+}
+
+.menuLink {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 1rem;
+}
+
+.menuLink:hover {
+  color: var(--link-hover-color);
+  text-decoration: none;
+  transition: all 0.2s ease-out;
+}
+.userCorner {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 30%;
+}
+
+.cart {
+  position: relative;
+  margin-right: 20px;
+}
+
+.cartIcon {
+  font-size: 1.3rem;
+}
+.cartAmount {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  display: inline-block;
+  background-color: tomato;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.menuLinkMobile{
+  display: none;
+}
+
+.menuToggleIcon {
+  display: none;
+}
+
+@media screen and (max-width: 960px) {
+  .navbar {
+    position: relative;
+    
+  }
+  .navbarContainer {
+    justify-content: space-between;
+    width: 90vw;
+  }
+  .navbarMenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: var(--header-height);
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  .navbarMenu.active {
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+  .menuItem {
+    background-color: #7a54b3;
+    width: 100%;
+  }
+  .menuLink, 
+  .menuLinkMobile {
+    display: flex;
+    justify-content: center;
+    padding: 1.6rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .menuLink:hover, 
+  .menuLinkMobile:hover{
+    background-color: #613a97 ;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .userCorner{
+      order: 2;
+      flex: 1;
+      margin-right: 20px;
+  }
+
+  .navbarLogo {
+    min-width: 50%;
+  }
+ 
+  .menuToggleIcon {
+    display: block;
+    width: 30px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    order: 3
+  }
+}

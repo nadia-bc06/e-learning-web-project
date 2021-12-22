@@ -1,0 +1,135 @@
+.container {
+  background: linear-gradient(90deg, var(--theme-color1), var(--theme-color2));
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  width: 80vw;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.subscription {
+  margin-bottom: 24px;
+  padding: 24px;
+  color: #fff;
+  text-align: center;
+}
+
+.subscriptionTxt {
+  margin-bottom: 24px;
+  font-size: 20px;
+}
+.input {
+  padding: 10px 20px;
+  border-radius: 2px;
+  margin-right: 5px;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+.linkSection {
+  width: 100%;
+  display: flex;
+}
+.linkWrapper {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.linkItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 16px;
+  text-align: left;
+  width: 160px;
+  box-sizing: border-box;
+}
+.linkItem h2 {
+  margin-bottom: 16px;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.linkItem a {
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+.linkItem a:hover {
+  color: var(--link-hover-color);
+  transition: 0.3s ease-out;
+}
+
+.logo {
+  cursor: pointer;
+  font-size: 2rem;
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.logoLink {
+  color: #fff;
+  text-decoration: none;
+}
+.logoLink:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.copyrightTxt {
+  color: #fff;
+  margin-bottom: 16px;
+}
+.copyrightWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 40px auto 0 auto;
+}
+.socialIconLink i {
+  min-width: 30px;
+}
+
+@media screen and (max-width: 960px) {
+  .input {
+    width: 100%;
+  }
+  .linkWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .copyrightWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .wrapper {
+    width: 100vw;
+  
+  }
+  .linkSection{
+      min-width: 320px;
+  }
+    .linkItem {
+      
+        width: 120px;
+        margin: 0px;
+      }
+      .subscriptionHeading{
+          font-size: 1.5rem;
+      }
+      .subscriptionTxt{
+          font-size: 1rem;
+      }
+}

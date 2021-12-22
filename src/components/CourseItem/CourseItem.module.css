@@ -1,0 +1,136 @@
+.container{
+   padding:0;
+}
+
+.imgWrapper1{
+    overflow: hidden;
+    margin-top: 20px;
+
+}
+
+.imgWrapper2{
+    width: 100%;
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+}
+
+.imgWrapper2 img{
+    object-fit: cover;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.overlay{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.courseName{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2em;
+    font-weight: 400;
+    color: #fff
+}
+
+.categoryName{
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #fff
+}
+
+.detailContainer{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--theme-color2);
+    border-radius: 10px;
+    color:white;
+    opacity: 0;
+    transition: all 0.5s ease;
+
+}
+
+.overlay:hover ~ .detailContainer,
+.detailContainer:hover{
+    top: 0%;
+    opacity: 1;
+}
+
+
+.detailWrapper{
+    padding: 15px;
+}
+.dateTxt{  
+    font-size: 12px;
+
+}
+.courseNameTxt{
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+.categoryNameTxt{
+    text-align: center;
+    /* margin-bottom: 0; */
+}
+
+.instructorInfo{
+
+}
+
+.instructorAvatar{
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 50%;
+    color: var(--theme-color2)
+}
+
+.instructorName{
+    margin-left: 10px;
+}
+
+
+.instructorName p{
+    margin-bottom: 0;
+    
+}
+
+.fee{
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    align-self: center;
+}
+.review{
+    margin-top: 10px;
+    letter-spacing: 2px;
+    text-align: center;
+    font-size: 12px;
+}
+.descriptionTxt{
+    margin-top: 16px;
+    font-size: 1rem;
+    line-height: 18px;
+    height: 36px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+}

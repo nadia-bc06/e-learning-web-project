@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+  padding: 60px 0;
+}
+
+
+@media screen and(max-width: 960px) {
+  .container {
+    margin-top: 0px !important;
+  }
+}

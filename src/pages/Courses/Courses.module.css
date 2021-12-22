@@ -1,0 +1,108 @@
+.container{
+    margin-top: var(--header-height);
+
+}
+
+.wrapper{
+    width: 80vw;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.mainContent{
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+.category{
+    background-color: rgb(247, 238, 247);
+    margin-top: 32px
+}
+
+.categoryWrapper{
+    margin-left: -7px;
+}
+
+.categoryHeading{
+    color: var(--theme-color2);
+    font-size: 2rem;
+    text-align: center;
+    padding-top: 12px ;
+    text-transform: uppercase;
+}
+
+.categoryList{
+    margin-bottom: 0;
+}
+
+/* filter */
+.filter{
+    display: flex;
+    width: 50%;
+    /* justify-content: space-between; */
+    /* margin-top: 2rem; */
+}
+.filterLabel{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: var(--theme-color2);
+    min-width: 100px;
+    font-weight: 500;
+    line-height: 40px;
+}
+
+.filterSelect{
+    margin-left: 20px;
+    position: relative;
+
+}
+
+.filterSelect:hover .filterList{
+    display: block;
+}
+.filterType{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: white;
+    display: block;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    align-items: center;
+    font-weight: 500;
+    background-color: var(--theme-color2);
+
+}
+
+
+.filterIcon{
+    margin-left: 12px;
+}
+.filterList{
+    list-style: none;
+    margin-bottom: 0;
+    background-color: whitesmoke;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+
+}
+.filterItem{
+    font-size: 1rem;
+    padding: 8px 10px;
+    transition: all 0.3s ease;
+
+}
+.filterItem:hover{
+    background-color: rgba(224, 223, 223, 0.63);
+    cursor: pointer;
+    
+}
+
+/* search */
+.search form{
+    justify-content: flex-end;
+}

@@ -1,0 +1,141 @@
+:root{
+    --theme-color1:  #563d7c;
+    --theme-color2: #694a99;
+    --link-hover-color: #f09ce5;;
+}
+.d-flex{
+    display: flex;
+}
+
+.section-heading{
+    margin-bottom: 24px;
+    font-size: 2rem;
+}
+
+.img-info.active{
+    z-index: 9999;
+    transform: scale(1.1);
+    
+  }
+
+  /* form */
+
+  .form {
+    width: 500px;
+    min-height: 400px;
+    padding: 32px 24px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.726);
+    border-radius: 2px;
+    margin: 24px;
+    align-self: center;
+    box-shadow: 0 2px 5px 0 rgba(51, 62, 73, 0.1);
+    color:var(--theme-color2)
+  }
+  .form .heading {
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: var(--theme-color2);
+  }
+  .form .desc {
+    text-align: center;
+    color: #636d77;
+    font-size: 1.6rem;
+    font-weight: lighter;
+    line-height: 2.4rem;
+    margin-top: 16px;
+    font-weight: 300;
+  }
+  
+  .form-group {
+    display: flex;
+    margin-bottom: 16px;
+    flex-direction: column;
+  }
+  
+  .form-label,
+  .form-message {
+    text-align: left;
+  }
+  
+  .form-label {
+    font-weight: 500;
+    padding-bottom: 6px;
+    line-height: 1.8rem;
+    font-size: 1.2rem;
+  }
+  
+  .form-control {
+    height: 40px;
+    padding: 8px 12px;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
+    outline: none;
+    font-size: 1.2rem;
+  }
+  
+  .form-control:hover {
+    border-color: var(--theme-color2);
+  }
+  
+  .form-group.invalid .form-control {
+    border-color: #f33a58;
+  }
+  
+  .form-group.invalid .form-message {
+    color: #f33a58;
+  }
+  
+  .form-message {
+    font-size: 1rem;
+    line-height: 1.2rem;
+    padding: 4px 0 0;
+  }
+  
+  .form-submit {
+    outline: none;
+    background-color: var(--theme-color2);
+    margin-top: 16px;
+    margin-bottom: 10px;
+    padding: 10px 16px;
+    /* font-weight: 500; */
+    color: #fff;
+    border: none;
+    width: 50%;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid var(--theme-color2);
+    transition: all 0.3s ease;
+  }
+  
+  .form-submit:hover {
+    background-color: transparent;
+    color: var(--theme-color2);
+    border: 1px solid var(--theme-color2)
+  }
+  
+  .question-txt, .question-txt:hover{
+      color:var(--theme-color2);
+      /* text-decoration: none; */
+  }
+ 
+
+
+  .spacer {
+    margin-top: 36px;
+ 
+  }
+  .radio-group{
+    display: flex;
+  }
+
+  .radio-item{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+  }
+  .radio-item > input{
+    margin-right: 6px;
+  }
