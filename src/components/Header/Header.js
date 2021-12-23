@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect , useReducer } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import styles from "./Header.module.css";
+import userReducer, {initialState} from "../../store/reducers/userReducer";
+import { actSignOut } from "../../store/actions/actions";
+
 
 function Header() {
   const [toggle, setToggle] = useState(false);
   const [button, setButton] = useState(true);
+  const [state , dispatch ] = useReducer(userReducer, initialState);
+  
+  const navigate = useNavigate();
 
+  
   const handleToggle = () => {
     setToggle(!toggle);
   };
@@ -30,6 +37,46 @@ function Header() {
     };
   }, []);
 
+  const handleSignOut = () =>{
+    localStorage.removeItem('user');
+    navigate("/")
+    dispatch(actSignOut())
+  }
+
+  const renderAccount = () => {
+    if (localStorage.getItem("user")) {
+      let account = JSON.parse(localStorage.getItem("user"));
+      return (
+        <div className={styles.account}>
+          <div className={styles.accountIcon}>
+            <i class="fas fa-user"></i>
+            <span>{account.taiKhoan}</span>
+          </div>
+          <ul className={styles.accountContent}>
+            <li>
+              <NavLink to="/profile">Account Info</NavLink>
+            </li>
+            <li onClick={handleSignOut}>Sign Out </li>
+          </ul>
+        </div>
+      );
+    } else {
+      if (button) {
+        return (
+          <>
+            <NavLink to="/sign-in">
+              <Button primary>Sign In</Button>
+            </NavLink>
+
+            <NavLink to="/sign-up">
+              <Button outline>Sign Up</Button>
+            </NavLink>
+          </>
+        );
+      }
+    }
+  };
+
   return (
     <header>
       <nav className={styles.navbar}>
@@ -52,10 +99,10 @@ function Header() {
             <li className={styles.menuItem}>
               <NavLink
                 to="/"
-                style={({isActive}) =>{
+                style={({ isActive }) => {
                   return {
-                    color: isActive ? "#f09ce5" : ""
-                  }
+                    color: isActive ? "#f09ce5" : "",
+                  };
                 }}
                 className={styles.menuLink}
                 onClick={closeMobileMenu}
@@ -66,10 +113,10 @@ function Header() {
             <li className={styles.menuItem}>
               <NavLink
                 to="*"
-                style={({isActive}) =>{
+                style={({ isActive }) => {
                   return {
-                    color: isActive ? "#f09ce5" : ""
-                  }
+                    color: isActive ? "#f09ce5" : "",
+                  };
                 }}
                 className={styles.menuLink}
                 onClick={closeMobileMenu}
@@ -80,10 +127,10 @@ function Header() {
             <li className={styles.menuItem}>
               <NavLink
                 to="/courses"
-                style={({isActive}) =>{
+                style={({ isActive }) => {
                   return {
-                    color: isActive ? "#f09ce5" : ""
-                  }
+                    color: isActive ? "#f09ce5" : "",
+                  };
                 }}
                 className={styles.menuLink}
                 onClick={closeMobileMenu}
@@ -96,10 +143,10 @@ function Header() {
                 to="/sign-in"
                 className={styles.menuLinkMobile}
                 onClick={closeMobileMenu}
-                style={({isActive}) =>{
+                style={({ isActive }) => {
                   return {
-                    color: isActive ? "#f09ce5" : ""
-                  }
+                    color: isActive ? "#f09ce5" : "",
+                  };
                 }}
               >
                 Sign In
@@ -110,10 +157,10 @@ function Header() {
                 to="/sign-up"
                 className={styles.menuLinkMobile}
                 onClick={closeMobileMenu}
-                style={({isActive}) =>{
+                style={({ isActive }) => {
                   return {
-                    color: isActive ? "#f09ce5" : ""
-                  }
+                    color: isActive ? "#f09ce5" : "",
+                  };
                 }}
               >
                 Sign Up
@@ -125,8 +172,20 @@ function Header() {
               <i className={`fas fa-shopping-cart ${styles.cartIcon}`}></i>
               <span className={styles.cartAmount}>3</span>
             </div>
-            {button && <NavLink to="/sign-in"><Button primary>Sign In</Button></NavLink>}
-            {button && <NavLink to="/sign-up"> <Button outline>Sign Up</Button> </NavLink>}
+            {/* {button && (
+            <NavLink to="/sign-in">
+              <Button primary>Sign In</Button>
+            </NavLink>
+          )}
+          {button && (
+            <NavLink to="/sign-up">
+              {" "}
+              <Button outline>Sign Up</Button>{" "}
+            </NavLink>
+          )} */}
+
+            {renderAccount()}
+
           </div>
         </div>
       </nav>

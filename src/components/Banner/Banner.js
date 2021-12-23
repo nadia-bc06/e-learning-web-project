@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Banner.module.css";
 import bannerImg from "./../../assets/img/banner.jpg";
-import Button from "../Button/Button";
+// import Button from "../Button/Button";
 
 function Banner() {
   return (
@@ -16,22 +16,22 @@ function Banner() {
             <br />
             our students to learn each course
           </p>
-          <div className={`${styles.searchGroup}`}>
-            <div className={styles.searchInput}>
-              <input
+          {/* <div className={`${styles.searchGroup}`}>
+            <div className={styles.searchInput}> */}
+              {/* <input
                 type="text"
                 placeholder="What course are you looking for?"
                 className="form-control"
                 // onKeyUp={this.handleOnChange}
-              ></input>
+              ></input> */}
               {/* <div className="content-search">{this.renderContenSearch()}</div> */}
             </div>
             {/* <NavLink to={`/home/courses/all?${this.state.keyword}`} className="btn--purple bttn">
                         SEARCH
                     </NavLink> */}
-                    <Button large secondary2>Search</Button>
-          </div>
-      </div>
+                    {/* <Button large secondary2>Search</Button> */}
+          {/* </div>
+      </div> */}
       {/* <div className="arrow-down" onClick={this.scrollDown}>
             <span></span>
             <span></span>

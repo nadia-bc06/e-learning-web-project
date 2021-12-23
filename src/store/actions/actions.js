@@ -94,9 +94,9 @@ export const actSignUp = (data, navigate) => {
 
 export const actSignIn = (data, navigate) => {
   return () => {
+    localStorage.setItem('loginInfo', JSON.stringify(data))
     callApi("QuanLyNguoiDung/DangNhap", "POST", data)
       .then((res) => {
-        console.log(res)
         successApi("Sign in success").then(() => {
           localStorage.setItem("user", JSON.stringify(res.data));
           navigate("/");
@@ -104,7 +104,51 @@ export const actSignIn = (data, navigate) => {
       })
       .catch((err) => {
         errorApi(err);
-        console.log(err)
+        console.log(err);
       });
   };
 };
+
+export const actSignOut = () => {
+  successApi("Sign out successfully");
+  return (dispatch) => {
+    dispatch({
+      types: types.LOGOUT_ACCOUNT,
+      data: {},
+    });
+  };
+};
+
+export const actGetAccountInfo = () =>{
+  const user = JSON.parse(localStorage.getItem('user'));
+  if(user){
+    const loginInfo = JSON.parse(localStorage.getItem('loginInfo'))
+    return dispatch => {
+      callApi('QuanLyNguoiDung/ThongTinNguoiDung', 'POST' , loginInfo, {
+        Authorization: `Bearer ${user.accessToken}`,
+      })
+        .then(res => {
+          dispatch({
+            type: types.GET_ACCOUNT_INFO,
+            data: res.data
+          })
+        })
+    } 
+  }else return dispatch => {}
+}
+
+export const actUpdateAccountInfo = (data) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  return () =>{
+    callApi('QuanLyNguoiDung/CapNhatThongTinNguoiDung', 'PUT', data, {
+      Authorization: `Bearer ${user.accessToken}`,
+    } )
+      .then(res => {
+        successApi('Info Updated Successfully');
+      })
+      .catch(err => {
+        errorApi(err)
+      })
+  } 
+}

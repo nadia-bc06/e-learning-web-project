@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Courses from "./pages/Courses/Courses";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 
 
@@ -24,6 +25,8 @@ function App() {
             </Route>
             <Route path="/sign-in" element={<SignIn/>}></Route>
             <Route path="/sign-up" element={<SignUp/>} ></Route>
+            <Route path="/profile" element={<UserProfile/>} ></Route>
+
             <Route path="*" element={<NotFound/>}></Route>
           </Routes>
           <Footer/>

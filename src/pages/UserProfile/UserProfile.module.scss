@@ -1,0 +1,45 @@
+.container {
+  margin-top: var(--header-height);
+}
+
+.wrapper {
+  width: 80vw;
+  max-width: 1400px;
+  margin: 112px auto 32px;
+}
+
+
+
+.avataForm {
+  height: 100%;
+  box-shadow: 1px 2px 10px #ccc;
+  border: none;
+  .avataWrapper {
+    margin: 32px auto;
+
+    .avataImg {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .avataName {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 1.4rem;
+      margin-top: 24px;
+      margin-bottom: 0;
+      color: var(--theme-color2);
+    }
+  }
+}
+
+.optionList {
+  list-style: none;
+  padding-top: 0;
+
+  .optionItem {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+}
